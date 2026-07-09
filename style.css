@@ -1,0 +1,22 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+.topsection{
+    background-color: blue;
+    overflow: hidden;
+    padding: 50px;
+}
+.left{
+    color: white;
+    float: left; 
+}
+.right{
+    float: right;
+}
+
+img{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
