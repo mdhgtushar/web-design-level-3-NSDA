@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSDA Result Portal</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+    font-family:Inter,sans-serif;
+}
+</style>
+</head>
+
+<body class="bg-slate-100">
+
+<div class="max-w-6xl mx-auto p-4 md:p-8">
+
+    <!-- HERO -->
+
+    <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden">
+
+        <div class="bg-gradient-to-r from-red-50 via-white to-pink-50 p-10">
+
+            <div class="max-w-3xl">
+
+                <div class="inline-flex px-4 py-2 rounded-full border text-red-600 text-sm font-semibold mb-4">
+                    Octal Technical Training Institute
+                </div>
+
+                
+
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">
+                    Result Portal WDL3
+                </h1>
+
+                <p class="text-slate-500 mt-4">
+                    Enter your registered phone number to view your examination result.
+                </p>
+
+                <div class="mt-8 flex flex-col md:flex-row gap-3">
+
+                    <input
+                        id="phone"
+                        type="text"
+                        placeholder="Enter phone number"
+                        class="flex-1 px-5 py-4 rounded-xl border border-slate-300 outline-none focus:border-red-500"
+                    >
+
+                    <button
+                        onclick="searchResult()"
+                        class="bg-red-500 text-white px-8 py-4 rounded-xl font-semibold hover:bg-red-600 transition">
+                        Check Result
+                    </button>
+
+                </div>
+
+                <button
+                    onclick="openModal()"
+                    class="mt-4 border border-slate-300 px-6 py-3 rounded-xl font-medium hover:bg-slate-50 transition">
+                    Get Full Result
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RESULT -->
+
+    <div id="result" class="mt-8"></div>
+
+</div>
+
+<!-- MODAL -->
+
+<div id="modal"
+     class="hidden fixed inset-0 bg-black/40 flex items-center justify-center p-4">
+
+    <div class="bg-white rounded-2xl border border-slate-200 w-full max-w-md p-6">
+
+        <h2 class="text-2xl font-bold">
+            Administrator Login
+        </h2>
+
+        <p class="text-slate-500 mt-2">
+            Enter password to view full result.
+        </p>
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            class="w-full mt-5 px-4 py-3 rounded-xl border border-slate-300 outline-none"
+        >
+
+        <div class="flex gap-3 mt-5">
+
+            <button
+                onclick="closeModal()"
+                class="flex-1 border border-slate-300 py-3 rounded-xl">
+                Cancel
+            </button>
+
+            <button
+                onclick="login()"
+                class="flex-1 bg-red-500 text-white py-3 rounded-xl">
+                Login
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const students = [
+  {ranking:8,name:"MD. Sojib hasan",phone:"01747824903",written:19,mcq:16,total:35},
+  {ranking:9,name:"Purabi Das",phone:"01922347768",written:17,mcq:14,total:31},
+  {ranking:3,name:"Dipto Kumar Sarker",phone:"01340617621",written:29,mcq:16,total:45},
+  {ranking:6,name:"Beauty Akter Aley",phone:"01775107588",written:24,mcq:16,total:40},
+  {ranking:7,name:"Fahima Akter Urmi",phone:"01772294382",written:23,mcq:15,total:38},
+  {ranking:4,name:"Md Suhanur Rahman Sifat",phone:"01882524391",written:29,mcq:13,total:42},
+  {ranking:11,name:"Md. Nazmul Hasain",phone:"01319660451",written:17,mcq:13,total:30},
+  {ranking:2,name:"Md. Omar Faruque",phone:"01767605949",written:29,mcq:18,total:47},
+  {ranking:9,name:"Tripti",phone:"01869942453",written:18,mcq:13,total:31},
+  {ranking:5,name:"Sonehari",phone:"01846781194",written:24,mcq:17,total:41},
+  {ranking:1,name:"Md Sakib al Hasan",phone:"01633033223",written:28,mcq:20,total:48},
+  {ranking:12,name:"Sazidur Rahman Utsha",phone:"01714398359",written:3,mcq:12,total:15}
+];
+ 
+
+function searchResult(){
+
+const phone=document.getElementById("phone").value.trim();
+
+const student=students.find(
+x=>x.phone===phone
+);
+
+const result=document.getElementById("result");
+
+if(!student){
+
+result.innerHTML=`
+<div class="bg-white border border-red-200 rounded-3xl p-8">
+<h3 class="text-xl font-bold text-red-600">
+Result Not Found
+</h3>
+<p class="text-slate-500 mt-2">
+No student found with this phone number.
+</p>
+</div>
+`;
+
+return;
+}
+
+let badge='Not Available';
+
+if(student.ranking===1){
+badge='🥇 Rank #1';
+}
+else if(student.ranking===2){
+badge='🥈 Rank #2';
+}
+else if(student.ranking===3){
+badge='🥉 Rank #3';
+}
+else if(student.ranking===4){
+badge='🏅 Rank #4';
+}
+
+result.innerHTML=`
+
+<div class="bg-white border border-slate-200 rounded-3xl p-8">
+
+<div class="flex flex-col md:flex-row justify-between gap-6">
+
+<div>
+
+<div class="w-16 h-16 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center text-3xl">
+👤
+</div>
+
+<h2 class="text-3xl font-bold mt-4">
+${student.name}
+</h2>
+
+<p class="text-slate-500 mt-1">
+${student.phone}
+</p>
+
+</div>
+
+<div class="text-left md:text-right">
+
+<div class="inline-flex px-4 py-2 rounded-full border border-slate-200 bg-slate-50 font-semibold">
+${student.ranking <=4 ? badge : 'Ranking Not Available'}
+</div>
+
+</div>
+
+</div>
+
+<div class="grid md:grid-cols-3 gap-4 mt-8">
+
+<div class="border rounded-2xl p-5">
+<p class="text-slate-500">Written</p>
+<p class="text-3xl font-bold">${student.written}</p>
+</div>
+
+<div class="border rounded-2xl p-5">
+<p class="text-slate-500">MCQ</p>
+<p class="text-3xl font-bold">${student.mcq}</p>
+</div>
+
+<div class="border rounded-2xl p-5">
+<p class="text-slate-500">Total</p>
+<p class="text-3xl font-bold text-red-500">
+${student.total}
+</p>
+</div>
+
+</div>
+
+</div>
+`;
+
+}
+
+function openModal(){
+document.getElementById("modal").classList.remove("hidden");
+}
+
+function closeModal(){
+document.getElementById("modal").classList.add("hidden");
+}
+
+function login(){
+
+const pass=document.getElementById("password").value;
+
+if(pass!=="octal12"){
+alert("Wrong Password");
+return;
+}
+
+closeModal();
+
+const rows=students
+.sort((a,b)=>b.total-a.total)
+.map(s=>`
+<tr class="border-b">
+<td class="p-4">${s.ranking}</td>
+<td class="p-4">${s.name}</td>
+<td class="p-4">${s.phone}</td>
+<td class="p-4 font-bold">${s.total}</td>
+</tr>
+`).join('');
+
+document.getElementById("result").innerHTML=`
+
+<div class="bg-white border border-slate-200 rounded-3xl overflow-hidden">
+
+<div class="p-6 border-b">
+<h2 class="text-2xl font-bold">
+Full Result Sheet
+</h2>
+</div>
+
+<div class="overflow-auto">
+
+<table class="w-full">
+
+<thead>
+
+<tr class="bg-slate-50">
+
+<th class="p-4 text-left">Rank</th>
+<th class="p-4 text-left">Name</th>
+<th class="p-4 text-left">Phone</th>
+<th class="p-4 text-left">Total</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+${rows}
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+`;
+
+}
+
+</script>
+
+</body>
+</html>
