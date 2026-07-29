@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    font-family: "Poppins", sans-serif;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+
+.Introduction-section {
+    min-height: 70vh;
+    background-image: url(images/istockphoto-1222610302-612x612.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-content: center;
+    align-content: center;
+
+}
+
+
+.Introduction-section .container {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.document-section {
+    background-color: rgba(16, 37, 54, 0.329);
+}
+
+.Interviews-section {
+    background-color: rgba(20, 56, 60, 0.26);
+}
+
+.Photograph {
+    background-color: rgba(16, 37, 54, 0.329);
+}
+
+.gallery-item {
+    overflow: hidden;
+}
+
+.gallery-item img {
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.Contact {
+    background-color: rgba(20, 56, 60, 0.26);
+}
+
+.inner-introduction {
+    background-image: url(images/nation.jpg);
+    min-height: 70vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-content: center;
+}
+
+.inner-introduction .container {
+    margin: 0 auto;
+    text-align: center;
+}
